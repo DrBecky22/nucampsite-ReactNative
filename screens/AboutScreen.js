@@ -1,7 +1,8 @@
 import { Text, ScrollView } from "react-native";
-import { useState } from "react";
 import { Avatar, Card, ListItem } from "react-native-elements";
-import { PARTNERS } from "../shared/partners";
+import { useSelector } from "react-redux";
+import { baseUrl } from "../shared/baseUrl";
+
 
 const Mission = () => {
     return (
@@ -14,8 +15,7 @@ const Mission = () => {
 };
 
 const AboutScreen = () => {
-    const [partners, setPartners] = useState(PARTNERS);
-    // the instructions did not say what this piece of state should be managing, nor what to initialize it to
+    const partners = useSelector((state) => state.partners.partnersArray);
 
 
     return (
@@ -24,21 +24,19 @@ const AboutScreen = () => {
             <Card>
                 <Card.Title>Community Partners</Card.Title>
                 <Card.Divider/>
-                {partners.map(partner => {
-                    return (
+                {partners.partnersArray.map((partner) => {
                         <ListItem key={partner.id}>
-                            <Avatar source={partner.image} style='rounded'/>
+                            <Avatar rounded source={{ uri: baseUrl + partner.image}}/>
                             <ListItem.Content>
                                 <ListItem.Title>{partner.name}</ListItem.Title>
                                 <ListItem.Subtitle>{partner.description}</ListItem.Subtitle>
                             </ListItem.Content>
                         </ListItem>
-                    )
-                }) }
+                })}
             </Card>
             
         </ScrollView>
     );
-}
+};
 
 export default AboutScreen;

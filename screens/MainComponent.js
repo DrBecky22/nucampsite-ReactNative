@@ -11,6 +11,12 @@ import DirectoryScreen from './DirectoryScreen';
 import AboutScreen from './AboutScreen';    
 import ContactScreen from './ContactScreen';
 import { logo } from '../assets/images/logo.png';
+import { useDispatch }  from 'react-redux';
+import { useEffect } from 'react';
+import { fetchCampsites } from '../features/campsites/campsitesSlice';
+import { fetchComments } from '../features/comments/commentsSlice';
+import { fetchPromotions } from '../features/promotions/promotionsSlice';
+import { fetchPartners } from '../features/partners/partnersSlice';
 
 const Drawer = createDrawerNavigator();
 
@@ -154,6 +160,14 @@ const CustomDrawerContent = (props) => (
 
 
 const Main = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch (fetchCampsites());
+        dispatch (fetchComments());
+        dispatch (fetchPromotions());
+        dispatch (fetchPartners());
+    }, [dispatch]);
 
     return (
         <View style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight }}>
