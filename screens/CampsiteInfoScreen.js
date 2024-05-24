@@ -26,7 +26,7 @@ const CampsiteInfoScreen = ({route}) => {
             contentContainerStyle={{ marginHorizontal: 20, paddingVertical: 20 }}
             ListHeaderComponent={
                 <>
-                    <RenderCampsite campsite={campsite} isFavorite={favorite} />
+                    <RenderCampsite campsite={campsite} isFavorite={favorite} markFavorite={() => setFavorite(true)}/>
                     <Text style={styles.commentsTitle}>Comments</Text>
                 </> 
             }  

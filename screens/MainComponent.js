@@ -191,7 +191,6 @@ const Main = () => {
                                 color={color}
                             />
                         )
-
                      }}
                 />
                 <Drawer.Screen
