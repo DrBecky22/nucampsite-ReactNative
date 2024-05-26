@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FlatList, StyleSheet, Text, View, Button, Modal } from 'react-native';
 import { toggleFavorite } from '../features/favorites/favoritesSlice';
 import { Input, Rating } from 'react-native-elements';
+import { postComment } from '../features/comments/commentsSlice';
 
 const CampsiteInfoScreen = ({route}) => {
     const { campsite } = route.params;
@@ -23,7 +24,7 @@ const CampsiteInfoScreen = ({route}) => {
             campsiteId: campsite.id
         };
 
-        console.log(newComment);
+        dispatch(postComment(newComment));
         setShowModal(!showModal);
     }
 
@@ -61,7 +62,7 @@ const CampsiteInfoScreen = ({route}) => {
                     <>
                         <RenderCampsite 
                             campsite={campsite} 
-                            isFavorite={favorites.includes(campsite.id)} 
+                            isFavorite={favorite.includes(campsite.id)} 
                             markFavorite={() => dispatch(toggleFavorite(campsite.id))}
                             onShowModal = {() => setShowModal(!showModal)}
                         />
