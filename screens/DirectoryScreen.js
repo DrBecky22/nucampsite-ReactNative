@@ -3,6 +3,7 @@ import { Tile } from 'react-native-elements';
 import { useSelector } from 'react-redux';  
 import { baseUrl } from '../shared/baseUrl';
 import LoadingComponent from '../components/LoadingComponent';
+import * as Animatable from 'react-native-animatable';
 
 
 const DirectoryScreen = ({navigation}) => {

@@ -5,6 +5,7 @@ import { FlatList, StyleSheet, Text, View, Button, Modal } from 'react-native';
 import { toggleFavorite } from '../features/favorites/favoritesSlice';
 import { Input, Rating } from 'react-native-elements';
 import { postComment } from '../features/comments/commentsSlice';
+import * as Animatable from 'react-native-animatable';
 
 const CampsiteInfoScreen = ({route}) => {
     const { campsite } = route.params;
