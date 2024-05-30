@@ -53,7 +53,11 @@ const CampsiteInfoScreen = ({route}) => {
     }
 
     return (
-        <>
+        <Animatable.View
+        animation='fadeInUp'
+        duration={2000}
+        delay={1000}>
+        
             <FlatList 
                 data = {comments.commentsArray.filter(comment => comment.campsiteId === campsite.id)}
                 renderItem={renderCommentItem}
@@ -131,7 +135,8 @@ const CampsiteInfoScreen = ({route}) => {
                     </View>
                 </View>
             </Modal>
-        </>
+            </>
+        </Animatable.View>
     );
 
 };

@@ -72,12 +72,17 @@ const FavoritesScreen = ({ navigation }) => {
         );
     }
         return (
+            <Animatable.View
+                    animation='fadeInRightBig'
+                    duration={2000}
+                    >
             <Flatlist
                 data={campsitesArray.filter((campsite) => favorites.includes(campsite.id)
                 )}
                 renderItem={renderFavoriteItem}
                 keyExtractor={(item) => item.id.toString()}
             />
+            </Animatable.View>
         )
 };
 
