@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useDispatch, useSelector } from 'react-redux';
 import { View, Flatlist, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Avatar, ListItem } from 'react-native-elements';
@@ -8,21 +7,14 @@ import { SwipeRow } from 'react-native-swipe-list-view';
 import { toggleFavorite } from '../features/favorites/favoritesSlice';
 import * as Animatable from 'react-native-animatable';
 
-=======
-import { useSelector } from 'react-redux';
-import { View, Flatlist, Text } from 'react-native';
-import { Avatar, ListItem } from 'react-native-elements';
-import Loading from '../components/Loading';
-import { baseUrl } from '../shared/baseUrl';
->>>>>>> parent of 2682e1c (commit)
 
 const FavoritesScreen = ({ navigation }) => {
     const { campsitesArray, isLoading, errMess } = useSelector((state) => state.campsites);
-    const { favorites } = useSelector((state) => state.favorites);
+    const favorites = useSelector((state) => state.favorites);
+    const dispatch = useDispatch();
 
     const renderFavoriteItem = ({ item: campsite }) => {
         return (
-<<<<<<< HEAD
             <SwipeRow rightOpenValue={-100}>
                 <View style={styles.deleteView}>
                     <TouchableOpacity
@@ -43,7 +35,6 @@ const FavoritesScreen = ({ navigation }) => {
                             ], 
                             { cancelable: false }
                         )
-
                         }
                     >
                         <Text style={styles.deleteText}>Delete</Text>
@@ -67,23 +58,6 @@ const FavoritesScreen = ({ navigation }) => {
                     </ListItem>
                 </View>
             </SwipeRow>
-=======
-            <ListItem
-                onPress={() => 
-                    navigation.navigate('Directory', {
-                        screen: 'CampsiteInfo', 
-                        params: { campsite }
-                    })
-                }
-            >
-                <Avatar rounded source={{ uri: baseUrl + campsite.image }} />
-                <ListItem.Content>
-                    <ListItem.Title>{campsite.name}</ListItem.Title>
-                    <ListItem.Subtitle>{campsite.description}</ListItem.Subtitle>
-                </ListItem.Content>
-                
-            </ListItem>
->>>>>>> parent of 2682e1c (commit)
         );
     };
 
