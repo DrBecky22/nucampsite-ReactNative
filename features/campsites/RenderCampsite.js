@@ -8,6 +8,11 @@ const RenderCampsite = (props) => {
     const { campsite } = props;
     if (campsite) {
         return (
+            <Animatable.View
+                    animation='fadeInDownBig'
+                    duration={2000}
+                    delay={1000}
+            >        
             <Card containerStyle={styles.cardContainer}>
                 <Card.Image source={{ uri: baseUrl + campsite.image}}>
                     <View style={{ justifyContent: 'center', flex: 1 }}>
@@ -45,6 +50,7 @@ const RenderCampsite = (props) => {
                 </Card.Image>
                 <Text style={{ margin: 20 }}>{campsite.description}</Text>
             </Card>
+            </Animatable.View>
         );
     }
     return <View />;

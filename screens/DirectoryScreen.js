@@ -22,6 +22,10 @@ const DirectoryScreen = ({navigation}) => {
     
     const renderDirectoryItem = ({ item: campsite }) => {
         return (
+            <Animatable.View
+                    animation='fadeInRightBig'
+                    duration={2000}
+                    >
             <Tile 
                 title={campsite.name}
                 caption={campsite.description}
@@ -30,6 +34,7 @@ const DirectoryScreen = ({navigation}) => {
                     navigation.navigate('CampsiteInfo', { campsite}) } 
                 imageSrc={{ uri: baseUrl + campsite.image }}
             />
+            </Animatable.View>
         );
     };
     return (
