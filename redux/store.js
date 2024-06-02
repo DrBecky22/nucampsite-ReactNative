@@ -4,7 +4,7 @@ import { commentsReducer } from '../features/comments/commentsSlice';
 import { partnersReducer } from '../features/partners/partnersSlice';
 import { promotionsReducer } from '../features/promotions/promotionsSlice';
 import { favoritesReducer } from '../features/favorites/favoritesSlice';    
-import { AsyncStorage } from 'react-native-async-storage/async-storage';
+// import { AsyncStorage } from 'react-native-async-storage/async-storage';
 import {
     persistStore, 
     persistCombineReducers, 
