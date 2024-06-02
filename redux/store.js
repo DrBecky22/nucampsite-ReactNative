@@ -16,6 +16,7 @@ import {
     REGISTER
 } from 'redux-persist';
 
+
 const config = {
     key: 'root', 
     storage: AsyncStorage,
