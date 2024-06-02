@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { View, Flatlist, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Avatar, ListItem } from 'react-native-elements';
-import Loading from '../components/Loading';
+import LoadingComponent from '../components/LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { toggleFavorite } from '../features/favorites/favoritesSlice';
@@ -62,7 +62,7 @@ const FavoritesScreen = ({ navigation }) => {
     };
 
     if (isLoading) {
-        return <Loading />;
+        return <LoadingComponent />;
     }
     if (errMess) {
         return (
