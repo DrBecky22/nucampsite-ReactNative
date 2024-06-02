@@ -126,7 +126,7 @@ const FavoritesNavigator = () => {
         <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Screen
                 name='Favorites'
-                component={ReservationScreen}
+                component={FavoritesScreen}
                 options={({ navigation }) => ({
                     title: 'Favorite Campsites',
                     headerLeft: () => (
@@ -264,7 +264,7 @@ const Main = () => {
 
                 <Drawer.Screen
                     name='Favorites'
-                    component={FavoriesNavigator}
+                    component={FavoritesNavigator}
                     options={{
                         title: 'My Favorites',
                         drawerIcon: ({ color }) => (

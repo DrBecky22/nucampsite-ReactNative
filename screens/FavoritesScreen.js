@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Flatlist, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, FlatList, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Avatar, ListItem } from 'react-native-elements';
 import LoadingComponent from '../components/LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
@@ -76,7 +76,7 @@ const FavoritesScreen = ({ navigation }) => {
                     animation='fadeInRightBig'
                     duration={2000}
                     >
-            <Flatlist
+            <FlatList
                 data={campsitesArray.filter((campsite) => favorites.includes(campsite.id)
                 )}
                 renderItem={renderFavoriteItem}
