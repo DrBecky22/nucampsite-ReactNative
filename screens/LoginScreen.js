@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as ImagePicker from 'expo-image-picker';
 import { baseUrl } from '../shared/baseUrl';
 import logo from '../assets/images/logo.png';
+import * as ImageManipulator from 'expo-image-manipulator';
 
 const LoginTab = ({navigation}) => {
     const [username, setUsername] = useState('');
@@ -161,7 +162,39 @@ const RegisterTab = () => {
 
             if (capturedImage.assets) {
                 console.log(capturedImage.assets[0]);
-                setImageUrl(capturedImage.assets[0].uri);
+                processImage(capturedImage.assets[0].uri);
+            }
+
+            const cameraPush = await mediaLibrary.saveToLibraryAsync(capturedImage.uri);
+        }
+    };
+
+    const processImage = async (imageUri) => {
+        let processedImage = await ImageManipulator.manipulateAsync(
+            imageUri, 
+            [
+                {resize: {width: 400}},
+                {format: ImageManipulator.SaveFormat.PNG}
+            ],
+        )
+        console.log(processedImage);
+        setImageUrl(processedImage.uri);
+        cameraPush(capturedImage.uri)
+    };
+
+    const getImageFromGallery = async () => {
+        const mediaLibraryPermission = 
+            await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+        if (mediaLibraryPermission.status === 'granted') {
+            const capturedImage = await ImagePicker.launchImageLibraryAsync({
+                allowsEditing: true,
+                aspect: [1, 1]
+            });
+
+            if (capturedImage.assets) {
+                console.log(selectedImage.assets[0]);
+                processImage(selectedImage.assets[0].uri);
             }
         }
     };
@@ -179,10 +212,10 @@ const RegisterTab = () => {
                         title='Camera'
                         onPress={getImageFromCamera}
                     />
-                    {/* <Button
+                    <Button
                         title='Gallery'
                         onPress={getImageFromGallery}
-                    /> */}
+                    />
                 </View>
                 <Input
                     placeholder="Username"
