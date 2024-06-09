@@ -7,6 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { baseUrl } from '../shared/baseUrl';
 import logo from '../assets/images/logo.png';
 import * as ImageManipulator from 'expo-image-manipulator';
+import * as MediaLibrary from 'expo-media-library';
 
 const LoginTab = ({navigation}) => {
     const [username, setUsername] = useState('');
@@ -43,17 +44,6 @@ const LoginTab = ({navigation}) => {
             );
         }
     };
-
-    useEffect(() => {
-        SecureStore.getItemAsync('userInfo').then((userdata) => {
-            const { username, password } = JSON.parse(userdata);
-            if (userdata) {
-                setUsername(userinfo.username);
-                setPassword(userinfo.password);
-                setRemember(true);
-            }
-        })
-    }, []);
     
     return (
         <View style={styles.container}>
@@ -119,8 +109,8 @@ const LoginTab = ({navigation}) => {
 const RegisterTab = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
+    const [firstname, setFirstName] = useState('');
+    const [lastname, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [remember, setRemember] = useState(false);
     const [imageUrl, setImageUrl] = useState(baseUrl + 'images/logo.png');
@@ -161,15 +151,14 @@ const RegisterTab = () => {
             });
 
             if (capturedImage.assets) {
-                console.log(capturedImage.assets[0]);
+                console.log(capturedImage.assets[0]);   
                 processImage(capturedImage.assets[0].uri);
             }
-
-            const cameraPush = await mediaLibrary.saveToLibraryAsync(capturedImage.uri);
         }
     };
 
     const processImage = async (imageUri) => {
+        
         let processedImage = await ImageManipulator.manipulateAsync(
             imageUri, 
             [
@@ -179,7 +168,7 @@ const RegisterTab = () => {
         )
         console.log(processedImage);
         setImageUrl(processedImage.uri);
-        cameraPush(capturedImage.uri)
+        MediaLibrary.saveToLibraryAsync(processedImage.uri);
     };
 
     const getImageFromGallery = async () => {
@@ -187,12 +176,12 @@ const RegisterTab = () => {
             await ImagePicker.requestMediaLibraryPermissionsAsync();
 
         if (mediaLibraryPermission.status === 'granted') {
-            const capturedImage = await ImagePicker.launchImageLibraryAsync({
+            const selectedImage = await ImagePicker.launchImageLibraryAsync({
                 allowsEditing: true,
                 aspect: [1, 1]
             });
 
-            if (capturedImage.assets) {
+            if (selectedImage.assets) {
                 console.log(selectedImage.assets[0]);
                 processImage(selectedImage.assets[0].uri);
             }
@@ -246,7 +235,7 @@ const RegisterTab = () => {
                 <Input
                     placeholder="Last Name"
                     leftIcon={{ type: 'font-awesome', name: 'envelope-o' }}
-                    onChangeText={(text) => setEmail(text)}
+                    onChangeText={(text) => setLastName(text)}
                     value={email}
                     containerStyle={styles.formInput}
                     leftIconContainerStyle={styles.formIcon}
@@ -255,7 +244,7 @@ const RegisterTab = () => {
                 <Input
                     placeholder="email"
                     leftIcon={{ type: 'font-awesome', name: 'key' }}
-                    onChangeText={(text) => setPassword(text)}
+                    onChangeText={(text) => setEmail(text)}
                     value={password}
                     containerStyle={styles.formInput}
                     leftIconContainerStyle={styles.formIcon}
